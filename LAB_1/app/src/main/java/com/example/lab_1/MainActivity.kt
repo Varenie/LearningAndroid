@@ -2,8 +2,9 @@ package com.example.lab_1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.ListView
+import android.widget.ImageView
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.recycler_item.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,13 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var array = Array(1_000_000,{i -> (i).toString()})
-
-        val adapter = ArrayAdapter(this, R.layout.listview_item, array)
-
-        val listView:ListView = findViewById(R.id.listView)
-        listView.setAdapter(adapter)
-
+        var items = Array(1_000_000, {i -> MainItem(i.toString())})
     }
 
 
