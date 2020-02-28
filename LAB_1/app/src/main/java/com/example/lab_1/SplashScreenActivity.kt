@@ -11,10 +11,14 @@ class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+    }
 
-        Handler().postDelayed({
+    override fun onResume() {
+        super.onResume()
+        Thread(Runnable {
+            Thread.sleep(2000)
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-        }, 2000)
+        }).start()
     }
 }
