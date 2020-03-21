@@ -19,9 +19,8 @@ class MyAdapter(val postlist: List<Tech>, val context: Context): RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: MyAdapter.MyVHolder, position: Int) {
-
-        holder.itemView.name.text = postlist.get(position).name
-        holder.itemView.helptext.text = postlist.get(position).helptext
+        holder.itemView.name.text = postlist.get(position).title
+        holder.itemView.helptext.text = postlist.get(position).title
     }
 
     class MyVHolder(itemView: View): RecyclerView.ViewHolder(itemView)
