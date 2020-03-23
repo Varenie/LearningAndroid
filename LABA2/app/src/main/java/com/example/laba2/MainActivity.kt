@@ -3,6 +3,7 @@ package com.example.laba2
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager.widget.ViewPager
 import com.google.gson.GsonBuilder
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.schedulers.IoScheduler
@@ -18,19 +19,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val url = "https://jsonplaceholder.typicode.com/posts/"
+        val myAdapter = TechFragAdapter(supportFragmentManager, this)
 
-        myRecycler.layoutManager = LinearLayoutManager(this)
-
-        val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-            .addCallAdapterFactory((RxJava2CallAdapterFactory.create()))
-            .baseUrl(url).build()
-
-        val postsApi = retrofit.create(INetworkAPI::class.java)
-        var response = postsApi.getAllPosts()
-
-        response.observeOn(AndroidSchedulers.mainThread()).subscribeOn(IoScheduler()).subscribe {
-            myRecycler.adapter = MyAdapter(it, this)
-        }
+        val viePager = findViewById<ViewPager>(R.id.viewpager)
+        viePager.setAdapter(myAdapter)
     }
 }

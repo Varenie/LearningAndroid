@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">LABA2</string>
+    <string-array name="techNames">
+        <item>Advanced Flight</item>
+        <item>Alphabet</item>
+        <item>Amphibious Warfare</item>
+        <item>Astronomy</item>
+        <item>Atomic Theory</item>
+        <item>Automobile</item>
+    </string-array>
+    <string-array name="techHelptext">
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>Increases the population contribution to pollution.</item>
+    </string-array>
 </resources>
