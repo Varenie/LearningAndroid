@@ -7,6 +7,24 @@
         <item>Astronomy</item>
         <item>Atomic Theory</item>
         <item>Automobile</item>
+        <item>Banking</item>
+        <item>Bridge Building</item>
+        <item>Bronze Working</item>
+        <item>Ceremonial Burial</item>
+        <item>Chemistry</item>
+        <item>Chivalry</item>
+        <item>Code of Laws</item>
+        <item>Combined Arms</item>
+        <item>Combustion</item>
+        <item>Communism</item>
+        <item>Computers</item>
+        <item>Conscription</item>
+        <item>Construction</item>
+        <item>Currency</item>
+        <item>Democracy</item>
+        <item>Economics</item>
+        <item>Electricity</item>
+        <item>Electronics</item>
     </string-array>
     <string-array name="techHelptext">
         <item>null</item>
@@ -15,5 +33,23 @@
         <item>null</item>
         <item>null</item>
         <item>Increases the population contribution to pollution.</item>
+        <item>null</item>
+        <item>Allows roads to be built on river tiles.</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>Reduces the effect of Cathedrals.</item>
+        <item>null</item>
+        <item>null</item>
+        <item>Allows Settlers, Workers and Engineers to build fortresses.</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>Improves the effect of Colosseums.</item>
+        <item> null</item>
     </string-array>
 </resources>

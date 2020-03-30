@@ -8,17 +8,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 
-class TechFragAdapter(fm: FragmentManager, context: Context): FragmentPagerAdapter(fm){
+class TechFragAdapter(fm: FragmentManager, context: Context, names: Array<String>, helptext: Array<String>)
+    : FragmentPagerAdapter(fm){
     val TECH_NAMES = "tech_names"
     val TECH_HELPTEXT = "tech_helptext"
-    private val mTechNames: Array<String>
-    private val mTechHelp: Array<String>
+    private val mTechNames: Array<String> = names
+    private val mTechHelp: Array<String> = helptext
 
-    init {
-        val resources = context.resources
-        mTechNames = resources.getStringArray(R.array.techNames)
-        mTechHelp = resources.getStringArray(R.array.techHelptext)
-    }
+
 
     override fun getItem(position: Int): Fragment {
         val arguments = Bundle()
