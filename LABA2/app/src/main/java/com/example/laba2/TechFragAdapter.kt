@@ -8,20 +8,20 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 
-class TechFragAdapter(fm: FragmentManager, context: Context, names: Array<String>, helptext: Array<String>)
+class TechFragAdapter(fm: FragmentManager, context: Context, size: Int)
     : FragmentPagerAdapter(fm){
     val TECH_NAMES = "tech_names"
     val TECH_HELPTEXT = "tech_helptext"
-    private val mTechNames: Array<String> = names
-    private val mTechHelp: Array<String> = helptext
+    val size = size
+    private val singleton = Singleton().getInstance()
 
 
 
     override fun getItem(position: Int): Fragment {
         val arguments = Bundle()
 
-        arguments.putString(TECH_NAMES, mTechNames[position])
-        arguments.putString(TECH_HELPTEXT,mTechHelp[position])
+        arguments.putString(TECH_NAMES, singleton.name[position])
+        arguments.putString(TECH_HELPTEXT,singleton.helptext[position])
 
         val techFrag = TechFragment()
         techFrag.setArguments(arguments)
@@ -30,10 +30,10 @@ class TechFragAdapter(fm: FragmentManager, context: Context, names: Array<String
     }
 
     override fun getCount(): Int {
-        return mTechNames.size
+        return size
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return mTechNames[position]
+        return singleton.name[position]
     }
 }

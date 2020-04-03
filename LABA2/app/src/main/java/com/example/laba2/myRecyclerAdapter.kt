@@ -13,9 +13,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.coroutines.coroutineContext
 
-class myRecyclerAdapter(names: Array<String>): RecyclerView.Adapter<myRecyclerAdapter.myVHolder>() {
-    var size  =  names.size
-    val techNames = names
+class myRecyclerAdapter(size: Int): RecyclerView.Adapter<myRecyclerAdapter.myVHolder>() {
+    val size = size
+    private val singleton = Singleton().getInstance()
 
     class myVHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val context = itemView.context
@@ -29,9 +29,9 @@ class myRecyclerAdapter(names: Array<String>): RecyclerView.Adapter<myRecyclerAd
             })
         }
 
-        fun bind(position: Int, mTech: Array<String>){
+        fun bind(position: Int, singleton: Singleton){
             val nameView: TextView = itemView.findViewById(R.id.name)
-            nameView.text = mTech[position]
+            nameView.text = singleton.helptext[position]
         }
     }
 
@@ -51,7 +51,7 @@ class myRecyclerAdapter(names: Array<String>): RecyclerView.Adapter<myRecyclerAd
 
     override fun onBindViewHolder(holder: myVHolder, position: Int) {
 
-        holder.bind(position, techNames)
+        holder.bind(position, singleton)
     }
 
 

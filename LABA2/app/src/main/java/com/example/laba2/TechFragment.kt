@@ -11,6 +11,10 @@ class TechFragment: Fragment() {
     val TECH_NAMES = "tech_names"
     val TECH_HELPTEXT = "tech_helptext"
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

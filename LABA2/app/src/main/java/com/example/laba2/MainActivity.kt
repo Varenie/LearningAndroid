@@ -15,14 +15,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val names_array = arrayOf("Advanced Flight", "Alphabet", "Amphibious Warfare", "Astronomy",
-        "Atomic Theory", "Automobile", "Banking", "Bridge Building", "Bronze Working", "Ceremonial Burial",
-        "Chemistry", "Chivalry", "Code of Laws", "Combined Arms", "Combustion", "Communism", "Computers",
-        "Conscription", "Construction", "Currency", "Democracy", "Economics", "Electricity", "Electronics")
+//        val names_array = arrayOf("Advanced Flight", "Alphabet", "Amphibious Warfare", "Astronomy",
+//        "Atomic Theory", "Automobile", "Banking", "Bridge Building", "Bronze Working", "Ceremonial Burial",
+//        "Chemistry", "Chivalry", "Code of Laws", "Combined Arms", "Combustion", "Communism", "Computers",
+//        "Conscription", "Construction", "Currency", "Democracy", "Economics", "Electricity", "Electronics")
 
         myRecycler.setHasFixedSize(true)
         myRecycler.layoutManager = LinearLayoutManager(this)
 
-        myRecycler.adapter = myRecyclerAdapter(names_array)
+        myRecycler.adapter = myRecyclerAdapter(100)
     }
 }
