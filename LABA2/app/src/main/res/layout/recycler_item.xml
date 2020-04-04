@@ -7,8 +7,9 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:id="@+id/techImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:src="@drawable/world"/>
 
     <TextView

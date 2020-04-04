@@ -12,16 +12,17 @@ class TechFragAdapter(fm: FragmentManager, context: Context, size: Int)
     : FragmentPagerAdapter(fm){
     val TECH_NAMES = "tech_names"
     val TECH_HELPTEXT = "tech_helptext"
+    val TECH_IMAGES = "tech_images"
+
     val size = size
-    private val singleton = Singleton().getInstance()
-
-
+    private val singleton = Singleton.getInstance()
 
     override fun getItem(position: Int): Fragment {
         val arguments = Bundle()
 
-        arguments.putString(TECH_NAMES, singleton.name[position])
-        arguments.putString(TECH_HELPTEXT,singleton.helptext[position])
+        arguments.putString(TECH_NAMES, singleton!!.name[position + 1])
+        arguments.putString(TECH_HELPTEXT,singleton!!.helptext[position + 1])
+        arguments.putString(TECH_IMAGES,singleton!!.image[position + 1])
 
         val techFrag = TechFragment()
         techFrag.setArguments(arguments)
@@ -34,6 +35,6 @@ class TechFragAdapter(fm: FragmentManager, context: Context, size: Int)
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return singleton.name[position]
+        return singleton!!.name[position + 1]
     }
 }

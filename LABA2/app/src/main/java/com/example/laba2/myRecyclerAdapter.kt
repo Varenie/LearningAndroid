@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,7 @@ import kotlin.coroutines.coroutineContext
 
 class myRecyclerAdapter(size: Int): RecyclerView.Adapter<myRecyclerAdapter.myVHolder>() {
     val size = size
-    private val singleton = Singleton().getInstance()
+    private val singleton: Singleton = Singleton.getInstance()!!
 
     class myVHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val context = itemView.context
@@ -30,8 +31,12 @@ class myRecyclerAdapter(size: Int): RecyclerView.Adapter<myRecyclerAdapter.myVHo
         }
 
         fun bind(position: Int, singleton: Singleton){
+            val url = "https://raw.githubusercontent.com/wesleywerner/ancient-tech/02decf875616dd9692b31658d92e64a20d99f816/src/images/tech/" + singleton.image[position]
             val nameView: TextView = itemView.findViewById(R.id.name)
-            nameView.text = singleton.helptext[position]
+            val imageView: ImageView = itemView.findViewById(R.id.techImage)
+
+            nameView.text = singleton.name[position]
+            DownloadImage(imageView).execute(url)
         }
     }
 
@@ -51,7 +56,7 @@ class myRecyclerAdapter(size: Int): RecyclerView.Adapter<myRecyclerAdapter.myVHo
 
     override fun onBindViewHolder(holder: myVHolder, position: Int) {
 
-        holder.bind(position, singleton)
+        holder.bind(position + 1, singleton)
     }
 
 

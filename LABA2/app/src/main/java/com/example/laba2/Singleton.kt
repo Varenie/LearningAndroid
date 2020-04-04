@@ -1,18 +1,20 @@
 package com.example.laba2
 
 class Singleton { //design pattern, guaranteeing only one instance of class
-    val position: Int = 0
-    lateinit var name: Array<String?>
-    lateinit var helptext: Array<String?>
+    var name: Array<String?> = arrayOfNulls(100)
+    var helptext: Array<String?> = arrayOfNulls(100)
+    var image: Array<String?> = arrayOfNulls(100)
 
-    private var instance: Singleton? = null
-
-    fun getInstance(): Singleton{ //method for access to instance
-        if (instance == null) {
-            instance = Singleton()
-            instance!!.name = arrayOfNulls<String>(200)
-            instance!!.helptext = arrayOfNulls<String>(200)
+    companion object {
+        private var instance = Singleton()
+        fun getInstance(): Singleton? { //method for access to instance
+            if (instance == null) {
+                instance = Singleton()
+                instance.name = arrayOfNulls(100)
+                instance.helptext = arrayOfNulls(100)
+                instance.image = arrayOfNulls(100) //for connect to image
+            }
+            return instance
         }
-        return instance as Singleton
     }
 }

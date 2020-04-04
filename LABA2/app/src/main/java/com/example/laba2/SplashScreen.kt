@@ -25,7 +25,7 @@ class SplashScreen: AppCompatActivity() {
                 e.printStackTrace()
             }
 
-            DataLoader(this)
+            DataLoader(this).execute(url)
 
             Thread(Runnable {
                 Thread.sleep(2000)

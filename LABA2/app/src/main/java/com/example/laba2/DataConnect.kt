@@ -10,11 +10,11 @@ class DataConnect {
         val conection = url.openConnection() as HttpsURLConnection
 
         try {
-            val input = conection.inputStream.bufferedReader().readText()
-//            val scanner = Scanner(input)
-//            scanner.useDelimiter("\\A")
+            val input = conection.inputStream
+            val scanner = Scanner(input)
+            scanner.useDelimiter("\\A")
 
-            return input
+            return scanner.next()
         }finally {
             conection.disconnect()
         }
