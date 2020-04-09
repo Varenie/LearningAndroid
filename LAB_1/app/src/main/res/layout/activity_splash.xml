@@ -14,7 +14,7 @@
         android:layout_centerInParent="true"
         android:background="#00FFFFFF"
         android:scaleType="centerInside"
-        app:srcCompat="@drawable/maxresdefault" />
+        app:srcCompat="@drawable/valknut_new" />
 
     <TextView
         android:id="@+id/text"
@@ -23,6 +23,14 @@
         android:layout_below="@id/image"
         android:layout_marginTop="21dp"
         android:gravity="center"
-        android:text=""
+        android:text="Welcome to Valhalla"
         android:textColor="#fff" />
+
+    <ProgressBar
+        android:indeterminateTintMode="src_in"
+        android:indeterminateTint="@color/progressBarColour"
+        android:layout_width="151dp"
+        android:layout_height="151dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
 </RelativeLayout>
