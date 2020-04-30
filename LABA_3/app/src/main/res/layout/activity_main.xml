@@ -9,6 +9,7 @@
     <Button
         android:id="@+id/Button"
         android:text="Update Info"
+        android:onClick="updateInfo"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,6 +21,7 @@
     <Button
         android:id="@+id/showButton2"
         android:text="Change last Info"
+        android:onClick="changeInfo"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

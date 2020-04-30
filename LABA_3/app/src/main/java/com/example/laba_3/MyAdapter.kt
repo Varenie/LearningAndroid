@@ -1,17 +1,45 @@
 package com.example.laba_3
 
+import android.content.Context
+import android.database.Cursor
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.laba_3.DBReader.StudentTable
 
-class MyAdapter: RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
-    val db: AppDatabase? = App.instance!!.database
-    val size = db!!.studentDao().count()
+class MyAdapter(context: Context): RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+    val dbHelper = DBHelper(context)
+    val db = dbHelper.writableDatabase
+    var size: Int
+    var cursor: Cursor
+
+    init {
+        cursor = db.rawQuery("SELECT COUNT(*) FROM ${StudentTable.TABLE_NAME}", null)
+        cursor.moveToFirst()
+
+        size = cursor.getInt(0)
+
+        cursor = db.rawQuery("SELECT * FROM ${StudentTable.TABLE_NAME}", null)
+        cursor.moveToFirst()
+    }
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        fun bind(position: Int){
-            
+        val textId: TextView = itemView.findViewById(R.id.idText)
+        val textFio: TextView = itemView.findViewById(R.id.fioText)
+        val textTime: TextView = itemView.findViewById(R.id.timeText)
+
+        fun bind(cursor: Cursor){
+            if(!cursor.isAfterLast){
+                textId.text = cursor.getInt(0).toString()
+                textFio.text = cursor.getString(1)
+                textTime.text = cursor.getString(2)
+
+                cursor.moveToNext()
+            } else {
+                cursor.close()
+            }
         }
     }
 
@@ -28,6 +56,6 @@ class MyAdapter: RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(position)
+        holder.bind(cursor)
     }
 }
