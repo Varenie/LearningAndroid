@@ -1,6 +1,5 @@
 package com.example.laba_4
 
-import android.appwidget.AppWidgetProvider
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 

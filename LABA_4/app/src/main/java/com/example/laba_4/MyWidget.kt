@@ -1,16 +1,17 @@
 package com.example.laba_4
 
 import android.app.AlarmManager
-import android.app.Notification
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import android.widget.RemoteViews
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class MyWidget: AppWidgetProvider(){
 
@@ -28,6 +29,7 @@ class MyWidget: AppWidgetProvider(){
             var sharedPreferences = context.getSharedPreferences(NAME, Context.MODE_PRIVATE)
             sharedPreferences.edit().putString(DATE + idWidget, format.format(date.time)).commit()
             sharedPreferences.edit().putInt(COUNT + idWidget, countDays).commit()
+            Log.d("PROVERKA", format.format(date.time))
 
             val widgetView = RemoteViews(context.packageName, R.layout.widget)
             widgetView.setTextViewText(R.id.tv_date, format.format(date.time))
@@ -42,7 +44,7 @@ class MyWidget: AppWidgetProvider(){
 
             if (date.after(theseDate)) {
                 val millis: Long = date.time.time - theseDate.time.time
-                countDays = ((millis/(24 * 60 * 60 * 1000)) + 1) as Int
+                countDays = ((millis/(24 * 60 * 60 * 1000)) + 1).toInt()
             }
             return countDays
         }
@@ -51,22 +53,20 @@ class MyWidget: AppWidgetProvider(){
     override fun onUpdate(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetIds: IntArray?) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
 
-        for (i in 0..appWidgetIds!!.size) {
-            val currentWidgetId = appWidgetIds[i];
-
+        for (element in appWidgetIds!!) {
             val configIntent = Intent(context, CalendarDialog::class.java)
             configIntent.action = AppWidgetManager.ACTION_APPWIDGET_CONFIGURE
-            configIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, currentWidgetId)
+            configIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, element)
             configIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 
-            val pIntent = PendingIntent.getActivity(context, currentWidgetId, configIntent, 0)
+            val pIntent = PendingIntent.getActivity(context, element, configIntent, 0)
 
             val widgetView = RemoteViews(context!!.packageName, R.layout.widget)
             widgetView.setOnClickPendingIntent(R.id.rl_widget, pIntent)
-            appWidgetManager!!.updateAppWidget(currentWidgetId, widgetView)
+            appWidgetManager!!.updateAppWidget(element, widgetView)
 
             val sharedPreferences = context.getSharedPreferences(NAME, Context.MODE_PRIVATE)//для сохранений
-            val textDate = sharedPreferences.getString(DATE + currentWidgetId, DEFAULT)
+            val textDate = sharedPreferences.getString(DATE + element, DEFAULT)
 
             if (!textDate.equals(DEFAULT)){
                 val thisDate = Calendar.getInstance()
@@ -84,9 +84,9 @@ class MyWidget: AppWidgetProvider(){
 
                     val intent = Intent(context!!, MainActivity::class.java)
                     intent.action = "Alarm"
-                    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, currentWidgetId)
+                    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, element)
 
-                    val alarmIntent = PendingIntent.getBroadcast(context, currentWidgetId, intent, 0)
+                    val alarmIntent = PendingIntent.getBroadcast(context, element, intent, 0)
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, chooseDate.time.time, alarmIntent)
@@ -96,11 +96,11 @@ class MyWidget: AppWidgetProvider(){
                         alarmManager.set(AlarmManager.RTC_WAKEUP, chooseDate.time.time, alarmIntent)
                     }
                 }
-                updateWidget(context, currentWidgetId, chooseDate)
+                updateWidget(context, element, chooseDate)
             } else {
                 widgetView.setTextViewText(R.id.tv_date, textDate)
                 widgetView.setTextViewText(R.id.tv_countDays, "0")
-                appWidgetManager.updateAppWidget(currentWidgetId, widgetView)
+                appWidgetManager.updateAppWidget(element, widgetView)
             }
         }
     }
@@ -130,20 +130,19 @@ class MyWidget: AppWidgetProvider(){
     override fun onDeleted(context: Context?, appWidgetIds: IntArray?) {
         super.onDeleted(context, appWidgetIds)
 
-        for (i in 0..appWidgetIds!!.size) {
-            val currentWidgerId = appWidgetIds[i]
+        for (element in appWidgetIds!!) {
 
             val alarmManager = context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
             val intent = Intent(context!!, MyWidget::class.java)
             intent.action = "Alarm"
 
-            val pIntent = PendingIntent.getBroadcast(context, currentWidgerId, intent,0)
+            val pIntent = PendingIntent.getBroadcast(context, element, intent,0)
             alarmManager.cancel(pIntent)
 
             val sharedPreferences = context.getSharedPreferences(NAME, Context.MODE_PRIVATE)
-            sharedPreferences.edit().remove(DATE + currentWidgerId).commit()
-            sharedPreferences.edit().remove(COUNT + currentWidgerId).commit()
+            sharedPreferences.edit().remove(DATE + element).commit()
+            sharedPreferences.edit().remove(COUNT + element).commit()
         }
     }
 }
